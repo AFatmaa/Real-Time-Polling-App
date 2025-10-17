@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vote - Polling App</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Live Polling</h1>
+            </header>
+
+            <main id="voting-section">
+                <!-- Question will be loaded here -->
+                <div class="poll-question">
+                    <h2 id="question">Loading...</h2>
+                </div>
+
+                <!-- Options will be loaded here -->
+                <div id="options-container" class="options">
+                    <!-- Filled by JavaScript -->
+                </div>
+
+                <!-- Messages -->
+                <div id="message" class="message"></div>
+            </main>
+
+            <footer>
+                <a href="results.html" class="link">View Results →</a>
+            </footer>
+        </div>
+
+        <!-- Load the main voting script as a module -->
+        <script type="module" src="js/vote.js"></script>
+    </body>
+</html>

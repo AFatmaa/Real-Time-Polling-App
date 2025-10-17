@@ -1,0 +1,268 @@
+/* =========================
+   Polling App – Pastel, Colorful, Centered Titles
+   No gradients, no transitions, GPU-safe
+   ========================= */
+   :root {
+    /* Pastel but vivid colors */
+    --bg: #fff9f5;           /* warm light background */
+    --card: #ffffff;         /* card background */
+    --text: #3d3430;         /* soft brown text */
+    --muted: #7c6f69;        /* muted gray-brown */
+    --border: #eee3dc;       /* light beige border */
+  
+    /* Accent colors */
+    --accent-pink: #72585a;
+    --accent-coral: #da76ff;
+    --accent-yellow: #ffe599;
+    --accent-mint: #b5ead7;
+    --accent-lavender: #cdb4f6;
+  }
+  
+  /* Base */
+  * { box-sizing: border-box; }
+  html, body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+    line-height: 1.45;
+  }
+  
+  /* Layout */
+  .container {
+    width: 100%;
+    max-width: 720px;
+    margin: 24px auto;
+    padding: 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Headers */
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.4px;
+  }
+  
+  /* Give different header colors by page type */
+  body:not(.results-page):not(.admin-page) h1 {
+    color: var(--accent-coral);
+  }
+  .results-page h1 {
+    color: var(--accent-mint);
+  }
+  .admin-page h1 {
+    color: var(--accent-lavender);
+  }
+  
+  .subtitle {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--muted);
+  }
+  
+  /* Footer */
+  footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  .link {
+    color: var(--text);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-weight: 600;
+  }
+  .link:hover {
+    background: #fefaf7;
+  }
+  
+  /* Admin Section */
+  .admin-section {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+    background: #fff;
+  }
+  .admin-section h3 {
+    margin-top: 0;
+    font-size: 1.15rem;
+    text-align: center;
+    color: var(--accent-coral);
+  }
+  
+  /* Form fields */
+  .form-group { margin: 12px 0; }
+  label { display: block; margin-bottom: 6px; }
+  input[type="text"], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text);
+    font-size: 0.98rem;
+    outline: none;
+  }
+  input[type="text"]:focus, textarea:focus {
+    border-color: #e3ccc4;
+    background: #fffdfc;
+  }
+  small { color: var(--muted); }
+  
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #fff;
+    color: var(--text);
+  }
+  .btn:hover { background: #faf7f4; }
+  
+  .btn-primary {
+    background: var(--accent-coral);
+    border-color: #f3a68c;
+  }
+  .btn-warning {
+    background: var(--accent-yellow);
+    border-color: #f1d78d;
+  }
+  
+  /* Messages */
+  .message {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .message.success { background: #eaffea; border-color: #d4efce; color: #225b2a; }
+  .message.error   { background: #ffe8e8; border-color: #efc8c8; color: #7a1c1c; }
+  .message.info    { background: #eef6ff; border-color: #cfe2ff; color: #204a80; }
+  
+  /* Poll Question */
+  .poll-question {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .poll-question h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--accent-pink);
+  }
+  
+  /* Options (Voting) */
+  .options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .option-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--accent-mint);
+    color: #1e3830;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .option-btn:hover { filter: brightness(0.97); }
+  .option-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Current poll (Admin) */
+  .current-poll p { margin: 6px 0; }
+  #current-options {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 0;
+  }
+  #current-options li {
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fffdfc;
+    margin-bottom: 6px;
+  }
+  
+  /* Results Page */
+  .results {
+    display: grid;
+    gap: 14px;
+  }
+  .result-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    padding: 10px 12px;
+  }
+  .result-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .option-name { color: var(--text); }
+  .vote-count { color: var(--muted); }
+  
+  /* Result bars */
+  .bar-container {
+    width: 100%;
+    height: 14px;
+    background: #f9f5f2;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar {
+    height: 100%;
+    width: 0; /* JS sets width dynamically */
+  }
+  
+  /* Fun colorful bars */
+  .bar-color-0 { background: var(--accent-coral); }
+  .bar-color-1 { background: var(--accent-yellow); }
+  .bar-color-2 { background: var(--accent-mint); }
+  .bar-color-3 { background: var(--accent-lavender); }
+  
+  /* Total votes */
+  .total-votes {
+    margin-top: 8px;
+    color: var(--muted);
+    font-weight: 600;
+    text-align: center;
+  }
+  
+ 
+  
