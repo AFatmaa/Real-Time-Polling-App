@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 // Enable CORS so frontend on another domain can access backend
 const cors = require("cors");
 app.use(cors({
-  origin: "*", // Allow requests from this origin
+  origin: "https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io", // Allow requests from this origin
   methods: ["GET", "POST"],        // Allow GET and POST methods
 }));
 
