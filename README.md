@@ -65,7 +65,7 @@ To run this project on your local machine:
 
 The application is deployed on Coolify.
 
-*   **Backend Deployment URL:** [https://afatmaa-backend-real-time-polling-app.hosting.codeyourfuture.io/](https://afatmaa-real-time-polling-app.hosting.codeyourfuture.io/)
+*   **Backend Deployment URL:** [https://afatmaa-backend-real-time-polling-app.hosting.codeyourfuture.io/](https://afatmaa-backend-real-time-polling-app.hosting.codeyourfuture.io/)
 
 *   **Frontend Deployment URL:** [https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io/](https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io/)
 
