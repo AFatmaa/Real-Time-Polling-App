@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 // Enable CORS so frontend on another domain can access backend
 const cors = require("cors");
 app.use(cors({
-  origin: "http://localhost:3000", // Allow requests from this origin
+  origin: "*", // Allow requests from this origin
   methods: ["GET", "POST"],        // Allow GET and POST methods
 }));
 

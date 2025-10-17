@@ -1,5 +1,5 @@
 // WebSocket connection to the backend server
-const ws = new WebSocket("ws://localhost:3000");
+const ws = new WebSocket("wss://afatmaa-backend-real-time-polling-app.hosting.codeyourfuture.io");
 
 // Stores the current poll data, updated by incoming WebSocket messages
 let currentPoll = null;
