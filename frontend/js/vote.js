@@ -8,8 +8,7 @@ if (!userId) {
     localStorage.setItem("userId", userId);
 }
 
-// Check if the user has already voted in the current poll session
-let hasVoted = localStorage.getItem("hasVoted") === "true";
+let hasVoted = false;
 
 // Local copy of the current poll data, updated via WebSocket
 let currentPollData = null;
@@ -25,14 +24,16 @@ onGeneralMessage((data) => {
     if (data.type === "vote-success") {
         showMessage("Vote recorded! Thank you!", "success");
         hasVoted = true;
-        localStorage.setItem("hasVoted", "true"); // Persist vote status
         disableVoting(); // Disable buttons after successful vote
     } else if (data.type === "error") {
         showMessage(data.message, "error");
+        if (data.message.includes("already voted")) {
+            hasVoted = true;
+            disableVoting();
+        }
     } else if (data.type === "client-reset-vote-status") {
         // Admin has reset votes, allow user to vote again
         hasVoted = false;
-        localStorage.removeItem("hasVoted"); // Clear persisted vote status
         if (currentPollData) renderPoll(currentPollData); // Re-render to re-enable buttons
         showMessage("Admin reset votes. You can vote again!", "info");
     }
