@@ -1,6 +1,5 @@
 const express = require("express");
 const WebSocket = require("ws");
-const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,12 +8,11 @@ const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 app.use(cors({
   origin: "https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io", // Allow requests from this origin
-  methods: ["GET", "POST"],        // Allow GET and POST methods
+  methods: ["GET", "POST"],        // Allow only GET and POST methods
 }));
 
 // Middleware
 app.use(express.json()); // Parse JSON request bodies
-app.use(express.static("public")); // Serve static files from the 'public' directory
 
 // Poll data (stored in memory)
 let currentPoll = {
