@@ -30,8 +30,6 @@ ws.onopen = () => {
 // Event handler for when the WebSocket connection closes
 ws.onclose = () => {
     console.log("Disconnected from server via WebSocket");
-    // Each specific page script (vote.js, admin.js, results.js) can decide how to
-    // display a user-facing message upon disconnection.
 };
 
 // Event handler for incoming WebSocket messages
@@ -83,7 +81,6 @@ function onGeneralMessage(callback) {
 function sendMessage(message) {
     if (ws.readyState === WebSocket.OPEN) {
         ws.send(JSON.stringify(message));
-        // console.log("Sent message to server:", message.type, message); // For debugging
     } else {
         console.error("WebSocket is not open. Cannot send message:", message);
         showMessage("Connection lost. Please refresh the page.", "error");

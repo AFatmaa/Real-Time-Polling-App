@@ -1,4 +1,3 @@
-// Import shared WebSocket functionalities and helpers
 import { ws, onPollUpdate, onGeneralMessage, sendMessage, showMessage } from './shared.js';
 
 // Local copy of the current poll data for this page
@@ -14,15 +13,13 @@ onPollUpdate((poll) => {
 onGeneralMessage((data) => {
     if (data.type === "error") {
         showMessage("Server Error: " + data.message, "error");
-        // Hide error message after 3 seconds specific to admin page
         setTimeout(() => {
             document.getElementById("message").style.display = "none";
         }, 3000);
     }
-    // No other specific message types are typically handled by the admin page
 });
 
-// Custom handling for WebSocket disconnection on this page
+// Handle disconnection
 ws.onclose = () => {
     console.log("Disconnected from server (Admin Page)");
     showMessage("Connection lost. Please refresh the page.", "error");
@@ -65,7 +62,6 @@ function createPoll(event) {
     // Validate that at least 2 options are provided
     if (options.length < 2) {
         showMessage("Please enter at least 2 options!", "error");
-        // Hide error message after 3 seconds
         setTimeout(() => {
             document.getElementById("message").style.display = "none";
         }, 3000);
@@ -82,22 +78,18 @@ function createPoll(event) {
     // Clear the form after submission
     document.getElementById("poll-form").reset();
     showMessage("Poll created successfully!", "success");
-    // Hide success message after 3 seconds
     setTimeout(() => {
         document.getElementById("message").style.display = "none";
     }, 3000);
 }
 
-/**
- * Prompts the user for confirmation and then sends a 'reset-votes' message to the server.
- */
+// Reset all votes after confirmation
 function resetVotes() {
     if (confirm("Are you sure you want to reset all votes? This action cannot be undone.")) {
         sendMessage({
             type: "reset-votes",
         });
         showMessage("Votes reset successfully!", "success");
-        // Hide success message after 3 seconds
         setTimeout(() => {
             document.getElementById("message").style.display = "none";
         }, 3000);

@@ -6,12 +6,8 @@ const PORT = process.env.PORT || 3000;
 
 // Enable CORS so frontend on another domain can access backend
 const cors = require("cors");
-app.use(cors({
-  origin: "https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io", // Allow requests from this origin
-  methods: ["GET", "POST"],        // Allow only GET and POST methods
-}));
+app.use(cors({ origin: "https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io" }));
 
-// Middleware
 app.use(express.json()); // Parse JSON request bodies
 
 // Poll data (stored in memory)
@@ -31,9 +27,6 @@ let votedUsers = new Set();
 // Start HTTP Server
 const server = app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
-  console.log(`Voting page: http://localhost:${PORT}`);
-  console.log(`Results page: http://localhost:${PORT}/results.html`);
-  console.log(`Admin page: http://localhost:${PORT}/admin.html`);
 });
 
 // Create WebSocket Server, attached to the HTTP server
@@ -183,36 +176,4 @@ wss.on("connection", (ws) => {
   ws.on("close", () => {
     console.log("Client disconnected");
   });
-});
-
-// API Endpoints (optional - can also be used as REST API for initial data or non-realtime interactions)
-
-// GET /api/poll: Returns the current poll data
-app.get("/api/poll", (req, res) => {
-  res.json(currentPoll);
-});
-
-// POST /api/vote: Allows voting via REST (less real-time, mainly for demonstration)
-app.post("/api/vote", (req, res) => {
-  const { optionId, userId } = req.body;
-
-  if (votedUsers.has(userId)) {
-    return res.status(400).json({ error: "Already voted" });
-  }
-
-  const option = currentPoll.options.find((opt) => opt.id === optionId);
-  if (option) {
-    option.votes++;
-    votedUsers.add(userId);
-
-    // Broadcast update to all WebSocket clients (even if voted via REST)
-    broadcast({
-      type: "poll-update",
-      poll: currentPoll,
-    });
-
-    res.json({ success: true, poll: currentPoll });
-  } else {
-    res.status(404).json({ error: "Option not found" });
-  }
 });

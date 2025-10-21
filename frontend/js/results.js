@@ -1,4 +1,3 @@
-// Import shared WebSocket functionalities and helpers
 import { ws, onPollUpdate, onGeneralMessage, showMessage } from './shared.js';
 
 // Local copy of the current poll data for this page
@@ -7,21 +6,19 @@ let currentPollData = null;
 // Register a callback to handle poll data updates from the server
 onPollUpdate((poll) => {
     currentPollData = poll;
-    renderResults(currentPollData); // Re-render results whenever poll data updates
+    renderResults(currentPollData);
 });
 
 // Register a callback to handle general messages (e.g., server errors)
 onGeneralMessage((data) => {
     if (data.type === "error") {
-        // Display server errors if any, though less critical for results page
-        showMessage("Server Error: " + data.message, "error", "message"); // Assuming a message div exists
+        showMessage("Server Error: " + data.message, "error", "message");
     }
 });
 
-// Custom handling for WebSocket disconnection on this page
+// Handle disconnection
 ws.onclose = () => {
     console.log("Disconnected from server (Results Page)");
-    // Optionally display a message, but results are often static after load.
 };
 
 /**
@@ -74,8 +71,8 @@ function renderResults(poll) {
 
         // Create the actual bar element
         const bar = document.createElement("div");
-        bar.className = "bar bar-color-" + (index % 4); // Apply a color class
-        bar.style.width = "0%"; // Initialize width to 0 for animation
+        bar.className = "bar bar-color-" + (index % 4);
+        bar.style.width = "0%";
 
         barContainer.appendChild(bar);
 
@@ -86,7 +83,7 @@ function renderResults(poll) {
 
         // Animate the bar width after a short delay to ensure DOM rendering
         setTimeout(() => {
-            bar.style.transition = "width 0.8s ease-out"; // Smooth transition for the bar
+            bar.style.transition = "width 0.8s ease-out";
             bar.style.width = percentage + "%";
         }, 100);
     });

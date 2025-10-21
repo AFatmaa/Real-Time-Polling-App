@@ -1,4 +1,3 @@
-// Import shared WebSocket functionalities and helpers
 import { ws, onPollUpdate, onGeneralMessage, sendMessage, showMessage } from './shared.js';
 
 // Generate a unique user ID if not already stored in localStorage
@@ -16,7 +15,7 @@ let currentPollData = null;
 // Register a callback to handle poll data updates from the server
 onPollUpdate((poll) => {
     currentPollData = poll;
-    renderPoll(currentPollData); // Re-render the poll whenever it updates
+    renderPoll(currentPollData);
 });
 
 // Register a callback to handle general messages (like vote success/error, admin resets)
@@ -24,7 +23,7 @@ onGeneralMessage((data) => {
     if (data.type === "vote-success") {
         showMessage("Vote recorded! Thank you!", "success");
         hasVoted = true;
-        disableVoting(); // Disable buttons after successful vote
+        disableVoting();
     } else if (data.type === "error") {
         showMessage(data.message, "error");
         if (data.message.includes("already voted")) {
@@ -32,23 +31,20 @@ onGeneralMessage((data) => {
             disableVoting();
         }
     } else if (data.type === "client-reset-vote-status") {
-        // Admin has reset votes, allow user to vote again
+        // Allow voting again after admin reset
         hasVoted = false;
         if (currentPollData) renderPoll(currentPollData); // Re-render to re-enable buttons
         showMessage("Admin reset votes. You can vote again!", "info");
     }
 });
 
-// Custom handling for WebSocket disconnection on this page
+// Handle disconnection
 ws.onclose = () => {
     console.log("Disconnected from server (Voting Page)");
     showMessage("Connection lost. Please refresh the page.", "error");
 };
 
-/**
- * Renders the poll question and its options on the voting page.
- * @param {Object} poll - The poll object containing question and options.
- */
+// Display poll question and options
 function renderPoll(poll) {
     // Update the poll question
     document.getElementById("question").textContent = poll.question;
@@ -95,9 +91,7 @@ function vote(optionId) {
     });
 }
 
-/**
- * Disables all voting option buttons on the page.
- */
+// Disables all voting option buttons on the page.
 function disableVoting() {
     const buttons = document.querySelectorAll(".option-btn");
     buttons.forEach((btn) => (btn.disabled = true));
