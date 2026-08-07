@@ -15,7 +15,7 @@ This is a real-time polling application that allows users to vote on questions a
 
 You can try out the live application here:
 
-*   **Frontend (Voting/Results/Admin):** [https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io/](https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io/)
+*   **Frontend (Voting/Results/Admin):** [https://afatmaa-frontend-real-time-polling-app.grads.hosting.cyf.academy/](https://afatmaa-frontend-real-time-polling-app.grads.hosting.cyf.academy/)
 
     *(Note: The main page is for voting. You can navigate to `/results.html` for live results and `/admin.html` to manage polls.)*
 
@@ -65,8 +65,8 @@ To run this project on your local machine:
 
 The application is deployed on Coolify.
 
-*   **Backend Deployment URL:** [https://afatmaa-backend-real-time-polling-app.hosting.codeyourfuture.io/](https://afatmaa-backend-real-time-polling-app.hosting.codeyourfuture.io/)
+*   **Backend Deployment URL:** [https://afatmaa-backend-real-time-polling-app.grads.hosting.cyf.academy/](https://afatmaa-backend-real-time-polling-app.grads.hosting.cyf.academy/)
 
-*   **Frontend Deployment URL:** [https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io/](https://afatmaa-frontend-real-time-polling-app.hosting.codeyourfuture.io/)
+*   **Frontend Deployment URL:** [https://afatmaa-frontend-real-time-polling-app.grads.hosting.cyf.academy/](https://afatmaa-frontend-real-time-polling-app.grads.hosting.cyf.academy/)
 
 ---
